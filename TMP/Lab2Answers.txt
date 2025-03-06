@@ -1,5 +1,8 @@
 Ophelia Sin (oysin)
 
+Note to TA: I got an error in create.c (specifically at getstk()) when I run all three tests at once (I get -1 for the new processes created). 
+When I run them one at a time, each test passes with no issues. 
+
 1. The priority inversion problem could cause that a higher-priority process needs to wait for the completion of a lower-priority process.
     1. Priority inheritance is one approach to address this issue. Please give another approach and briefly describe its idea.
 

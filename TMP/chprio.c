@@ -34,7 +34,7 @@ SYSCALL chprio(int pid, int newprio)
 		int ptr = (&q[(&locktab[lock])->rqhead])->qnext;
 		// kprintf("head=%d, next=%d\n", (&locktab[lock])->rqhead, q[(&locktab[lock])->rqhead].qnext);
 		
-		// TODO: find out which process in these two queues have the highest priority  
+		// find out which process in these two queues have the highest priority  
 
 		while (ptr != (&locktab[lock])->rqtail) {
 			//kprintf("(&proctab[ptr])->pinh: %d \n, (&proctab[ptr])->pprio: %d\n ", (&proctab[ptr])->pinh, (&proctab[ptr])->pprio);
