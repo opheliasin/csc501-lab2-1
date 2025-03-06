@@ -1,0 +1,12 @@
+Ophelia Sin (oysin)
+
+1. The priority inversion problem could cause that a higher-priority process needs to wait for the completion of a lower-priority process.
+    1. Priority inheritance is one approach to address this issue. Please give another approach and briefly describe its idea.
+
+    Another approach is to use the priority ceiling protocol. In this approach, each semaphore has a priority ceiling value, which is equal to or greater than the priority of the highest priority process that's using the semaphore. When a process wants this semaphore, if it's available, then the process gets it immediately. However, if another process holds another semaphore that has a equal or greater priority ceiling, then this new process will be blocked. 
+    In another case, if a lower-priority process holds the semapahore, the lower priority process will inherit the priority of the new blocked process until it releases the lock.
+
+    2. Design a test case to show that your approach can address the priority inversion problem. You should compare the results that derived from the original XINU implementation (use semaphore) and that derived from your implementation (use readers/writer locks). Put your results in Lab2Answers.txt and your test case program (name it task1.c) in both ./sys and ./TMP (test my priority inheritance implementation)
+
+2. Synchronization is a quite complex issue in operating systems. To show your understanding about process synchronization, you are asked to point out a potential problem in this pesudo-code: task2_sync_issue.c. Multiple reader processes can execute this code concurrently by calling reader(). You are asked to describe an issue it may cause and why it can happen. 
+    The writer can be waiting indefinitely for the resource, since writer isn't given priority. For example, if there's a constant stream of processes asking the read, then the writer won't ever have the opportunity to enter since readcount's never equal to 0. 
