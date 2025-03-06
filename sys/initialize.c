@@ -13,6 +13,7 @@
 #include <q.h>
 #include <io.h>
 #include <stdio.h>
+#include <lock.h>
 
 /*#define DETAIL */
 #define HOLESIZE	(600)	
@@ -36,6 +37,8 @@ struct	qent	q[NQENT];	/* q table (see queue.c)		*/
 int	nextqueue;		/* next slot in q structure to use	*/
 char	*maxaddr;		/* max memory address (set by sizmem)	*/
 struct	mblock	memlist;	/* list of free memory blocks		*/
+struct lentry locktab[NLOCKS]; /*lock table*/
+int nextlock; /* next lock slot to use in lcreate*/
 #ifdef	Ntty
 struct  tty     tty[Ntty];	/* SLU buffers and mode control		*/
 #endif
@@ -191,6 +194,8 @@ LOCAL int sysinit()
 
 	mon_init();	/* init monitor */
 //	ripinit();
+
+	linit(); /* initialize locks */
 
 #ifdef NDEVS
 	for (i=0 ; i<NDEVS ; i++ ) {	    

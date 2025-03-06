@@ -90,7 +90,7 @@ int releaseall(int numlocks, long ldes)
 			}
 			// Check state of lock 
 			if (lptr->lstate == LAVAIL && ((wptr = (&q[lptr->wqtail])->qprev) != lptr->wqhead || (rptr = (&q[lptr->rqtail])->qprev) != lptr->rqhead )) {  
-				// if no process is holding the lock and there are locks waiting
+				// if no process is holding the lock and there are processes waiting
 				int wpprio; // waiting priority of waiting write queue head
 				int rpprio; // waiting priority of waiting read queue head
 
@@ -181,8 +181,6 @@ int releaseall(int numlocks, long ldes)
 	/* for all the locks the process has not released – replace lprio with the max priority of 
 	those processes that are waiting for those locks */
 	/* Reset priority of the process – track max of this round  */
-	//int unreleased_locks[50];
-	int j = -1;
 	waitmaxpprio = 0;
 
 	for (i = 0; i < 50; i++) {
